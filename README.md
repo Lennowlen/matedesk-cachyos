@@ -30,7 +30,9 @@
 
 ## 📱 MateDesk Companion App (Android / HarmonyOS)
 
-Selain menjalankan via command script Termux, repository ini juga menyediakan **MateDesk Standalone App** (source code Flutter di folder `app/`):
+Unduh rilis APK siap pakai di tab **[Releases](https://github.com/Lennowlen/matedesk-cachyos/releases)**!
+
+Fitur aplikasi MateDesk:
 - **CachyOS UI Preset by Default**: Dipadukan dengan aksen tema CachyOS Emerald (`#00F076`).
 - **One-Tap Desktop Launch**: Menjalankan X11 Server, VirGL GPU Passthrough, dan Desktop Session dengan 1 tombol di aplikasi.
 - **Embedded App Store & Terminal**: Memasang aplikasi tambahan (VS Code, Blender, LibreOffice) secara visual.
