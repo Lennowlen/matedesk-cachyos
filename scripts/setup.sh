@@ -24,11 +24,13 @@ EOF
 echo -e "${NC}"
 echo -e "${GREEN}[*] Memulai instalasi MateDesk (CachyOS Experience)...${NC}"
 
-# 1. Update Termux Package & Install Prerequisite
+# 1. Update Termux Package & Install Prerequisite Non-Interactively
 echo -e "\n${YELLOW}[1/6] Memperbarui sistem Termux & menginstall dependensi host...${NC}"
-pkg update -y && pkg upgrade -y
-pkg install -y x11-repo
-pkg install -y termux-x11-nightly virglrenderer-android proot-distro pulseaudio wget git tar jq
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -y
+apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+pkg install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" x11-repo
+pkg install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" termux-x11-nightly virglrenderer-android proot-distro pulseaudio wget git tar jq
 
 # 2. Setup Base Arch Linux ARM
 echo -e "\n${YELLOW}[2/6] Memasang base Arch Linux ARM64...${NC}"
