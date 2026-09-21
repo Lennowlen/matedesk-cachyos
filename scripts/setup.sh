@@ -44,16 +44,15 @@ fi
 echo -e "\n${YELLOW}[3/6] Mengonfigurasi paket desktop & styling tema CachyOS...${NC}"
 proot-distro login archlinux -- bash -c '
 set -e
-# Disable pacman download sandbox (alpm/landlock) in PRoot
-sed -i "s/#DisableSandbox/DisableSandbox/" /etc/pacman.conf || true
-echo "DisableSandbox" >> /etc/pacman.conf
+# Put DisableSandbox into [options] section of /etc/pacman.conf
+sed -i "/\[options\]/a DisableSandbox" /etc/pacman.conf 2>/dev/null || true
 
 pacman-key --init
 pacman-key --populate archlinuxarm
 pacman -Syu --noconfirm
 pacman -S --noconfirm --needed \
     xfce4 xfce4-goodies \
-    arc-gtk-theme papirus-icon-theme \
+    materia-gtk-theme papirus-icon-theme \
     ttf-jetbrains-mono noto-fonts noto-fonts-cjk noto-fonts-emoji \
     mesa libglvnd \
     nano git sudo fish starship fastfetch \
@@ -133,12 +132,12 @@ if [ -t 1 ]; then
 fi
 EOF_BASHRC
 
-# Set default shell theme XFCE ke Arc-Dark & Papirus-Dark
+# Set default shell theme XFCE ke Materia-dark & Papirus-Dark
 cat << "EOF_XFWM" > /root/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xfwm4" version="1.0">
   <property name="general" type="empty">
-    <property name="theme" type="string" value="Arc-Dark"/>
+    <property name="theme" type="string" value="Materia-dark"/>
     <property name="title_font" type="string" value="JetBrains Mono 10"/>
   </property>
 </channel>
@@ -148,7 +147,7 @@ cat << "EOF_XSET" > /root/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
-    <property name="ThemeName" type="string" value="Arc-Dark"/>
+    <property name="ThemeName" type="string" value="Materia-dark"/>
     <property name="IconThemeName" type="string" value="Papirus-Dark"/>
   </property>
   <property name="Gtk" type="empty">
