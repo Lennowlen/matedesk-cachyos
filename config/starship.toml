@@ -1,0 +1,44 @@
+# Starship Prompt Configuration - CachyOS Emerald Edition
+add_newline = false
+
+format = """
+[╭─](bold #00F076)$os$username$hostname$directory$git_branch$git_status$package$golang$nodejs$rust$python
+[╰─>](bold #00F076) $character"""
+
+[character]
+success_symbol = "[➜](bold #00F076)"
+error_symbol = "[✗](bold #FF5555)"
+
+[os]
+format = "[$symbol]($style)"
+style = "bold #00F076"
+disabled = false
+
+[os.symbols]
+Arch = " "
+
+[directory]
+style = "bold #00C8B3"
+truncation_length = 4
+truncate_to_repo = false
+
+[git_branch]
+symbol = " "
+style = "bold #F1FA8C"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "bold #FF79C6"
+format = "([$all_status$ahead_behind]($style) )"
+
+[python]
+symbol = " "
+style = "bold #FFB86C"
+
+[nodejs]
+symbol = " "
+style = "bold #50FA7B"
+
+[rust]
+symbol = " "
+style = "bold #FF5555"
