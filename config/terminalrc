@@ -1,0 +1,20 @@
+[Configuration]
+ColorPalette=#0A0E17;#EF4444;#00F076;#F59E0B;#00C8B3;#A855F7;#06B6D4;#F1F5F9;#475569;#F87171;#5FFFA6;#FBBF24;#38BDF8;#C084FC;#67E8F9;#FFFFFF
+ColorForeground=#00F076
+ColorBackground=#0A0E17
+ColorCursor=#00F076
+FontName=JetBrains Mono 10
+FontUseSystem=FALSE
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBordersDefault=TRUE
+MiscCursorBlinks=TRUE
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+MiscDefaultGeometry=100x28
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=FALSE
+MiscMouseAutohide=TRUE
+MiscToolbarDefault=FALSE
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+ScrollingUnlimited=TRUE
+TitleMode=TERMINAL_TITLE_REPLACE
