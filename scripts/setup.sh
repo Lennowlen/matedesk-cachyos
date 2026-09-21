@@ -44,6 +44,10 @@ fi
 echo -e "\n${YELLOW}[3/6] Mengonfigurasi paket desktop & styling tema CachyOS...${NC}"
 proot-distro login archlinux -- bash -c '
 set -e
+# Disable pacman download sandbox (alpm/landlock) in PRoot
+sed -i "s/#DisableSandbox/DisableSandbox/" /etc/pacman.conf || true
+echo "DisableSandbox" >> /etc/pacman.conf
+
 pacman-key --init
 pacman-key --populate archlinuxarm
 pacman -Syu --noconfirm
