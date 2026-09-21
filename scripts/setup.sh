@@ -34,8 +34,8 @@ pkg install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-
 
 # 2. Setup Base Arch Linux ARM
 echo -e "\n${YELLOW}[2/6] Memasang base Arch Linux ARM64 (CachyOS Base)...${NC}"
-if ! proot-distro list 2>/dev/null | grep -q "archlinux"; then
-    proot-distro install -n archlinux danhunsaker/archlinuxarm:latest
+if ! proot-distro list 2>&1 | grep -q "archlinux.*installed"; then
+    proot-distro install -n archlinux danhunsaker/archlinuxarm:latest || true
 else
     echo -e "${GREEN}[+] Arch Linux sudah terpasang. Melanjutkan konfigurasi...${NC}"
 fi
