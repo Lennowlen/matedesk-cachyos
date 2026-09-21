@@ -5,10 +5,20 @@ export GALLIUM_DRIVER=virpipe
 export MESA_GL_VERSION_OVERRIDE=3.3
 export MESA_GLSL_VERSION_OVERRIDE=330
 export LIBGL_ALWAYS_INDIRECT=0
-export VIRGL_CLIENT_DIR=/data/data/com.termux/files/usr/tmp
+export VIRGL_CLIENT_DIR=/tmp
 
-# Start XFCE Terminal with Fastfetch automatically
-xfce4-terminal --maximize --title="MateDesk CachyOS Terminal" --command="bash -c 'fastfetch; exec bash'" &
+# Start D-Bus session daemon
+eval $(dbus-launch --sh-syntax)
 
-# Start XFCE Session
-exec dbus-launch --exit-with-session xfce4-session
+# Start Window Manager and Desktop components
+xfwm4 --replace &
+xfsettingsd &
+xfdesktop &
+xfce4-panel &
+
+# Start terminal with Fastfetch
+sleep 1
+xfce4-terminal --title="MateDesk CachyOS Terminal" --command="bash -c 'fastfetch; exec bash'" &
+
+# Wait for panel to keep session open
+wait
