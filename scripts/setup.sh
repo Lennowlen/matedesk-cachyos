@@ -33,9 +33,9 @@ pkg install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-
 pkg install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" termux-x11-nightly virglrenderer-android proot-distro pulseaudio wget git tar jq
 
 # 2. Setup Base Arch Linux ARM
-echo -e "\n${YELLOW}[2/6] Memasang base Arch Linux ARM64...${NC}"
-if ! proot-distro list | grep -q "archlinux.*installed"; then
-    proot-distro install archlinux
+echo -e "\n${YELLOW}[2/6] Memasang base Arch Linux ARM64 (CachyOS Base)...${NC}"
+if ! proot-distro list 2>/dev/null | grep -q "archlinux"; then
+    proot-distro install -n archlinux danhunsaker/archlinuxarm:latest
 else
     echo -e "${GREEN}[+] Arch Linux sudah terpasang. Melanjutkan konfigurasi...${NC}"
 fi
