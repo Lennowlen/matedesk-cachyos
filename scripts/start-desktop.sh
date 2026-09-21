@@ -15,8 +15,11 @@ NC='\033[0m'
 
 echo -e "${CYAN}[*] Menyiapkan environment MateDesk CachyOS...${NC}"
 
-# Matikan proses lama jika ada
+# Matikan proses lama jika ada & bersihkan socket/lock
 killall -9 termux-x11 virgl_test_server_android pulseaudio xfce4-session 2>/dev/null || true
+rm -rf $TMPDIR/.X11-unix $TMPDIR/.X0-lock $TMPDIR/.virgl_test 2>/dev/null || true
+mkdir -p $TMPDIR/.X11-unix
+chmod 1777 $TMPDIR/.X11-unix
 
 # 1. Start PulseAudio server
 echo -e "${GREEN}[1/4] Memulai Audio Subsystem (PulseAudio)...${NC}"
@@ -25,7 +28,7 @@ pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth
 # 2. Start Termux-X11 Display Server
 echo -e "${GREEN}[2/4] Memulai Display Server (Termux-X11)...${NC}"
 termux-x11 :0 -ac &
-sleep 1
+sleep 2
 
 # 3. Start VirGL Server untuk Akselerasi GPU Huawei Maleoon
 echo -e "${GREEN}[3/4] Mengaktifkan GPU Acceleration (HiSilicon Maleoon VirGL Proxy)...${NC}"
@@ -38,16 +41,7 @@ sleep 1
 
 # 5. Launch XFCE4 Desktop Session di Arch Linux
 echo -e "${GREEN}[4/4] Membuka sesi CachyOS Desktop...${NC}"
-proot-distro login archlinux --shared-tmp -- bash -c "
-export DISPLAY=:0
-export PULSE_SERVER=127.0.0.1
-export GALLIUM_DRIVER=virpipe
-export MESA_GL_VERSION_OVERRIDE=3.3
-export MESA_GLSL_VERSION_OVERRIDE=330
-export LIBGL_ALWAYS_INDIRECT=0
-export VIRGL_CLIENT_DIR=/data/data/com.termux/files/usr/tmp
-xfce4-session
-"
+proot-distro login archlinux --shared-tmp -- env DISPLAY=:0 PULSE_SERVER=127.0.0.1 GALLIUM_DRIVER=virpipe MESA_GL_VERSION_OVERRIDE=3.3 MESA_GLSL_VERSION_OVERRIDE=330 LIBGL_ALWAYS_INDIRECT=0 VIRGL_CLIENT_DIR=/data/data/com.termux/files/usr/tmp dbus-launch --exit-with-session xfce4-session
 
 # Bersihkan daemon saat desktop ditutup
 echo -e "\n${CYAN}[*] Membersihkan background processes...${NC}"
